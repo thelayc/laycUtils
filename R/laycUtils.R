@@ -9,7 +9,10 @@
 #' load_csv('./data/my_csv_file.csv')
 
 load_csv <- function(file) {
-  read.csv(file, header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+  out <- read.csv(file, header = TRUE, stringsAsFactors = FALSE, na.strings = "")
+  out[] <- lapply(out, tolower)
+  
+  return(out)
 }
 
 #' load_txt()
@@ -22,5 +25,8 @@ load_csv <- function(file) {
 #' @examples
 #' load_txt('./data/my_txt_file.txt')
 load_txt <- function(file) {
-  read.table(file, header = TRUE, sep = '\t', quote = "", comment.char = "")
+  out <- read.table(file, header = TRUE, sep = '\t', quote = "", comment.char = "")
+  out[] <- lapply(out, tolower)
+  
+  return(out)
 }

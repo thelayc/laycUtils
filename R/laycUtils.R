@@ -4,7 +4,7 @@
 #' @param file character vector: the name of the file which the data are to be read from. Each row of the table appears as one line of the file. If it does not contain an absolute path, the file name is relative to the current working directory, getwd().
 #' @return data frame
 #' @keywords internal
-#' @noRd
+#' @export
 #' @examples
 #' load_csv('./data/my_csv_file.csv')
 
@@ -18,7 +18,7 @@ load_csv <- function(file) {
 #' @param file character vector: path .txt file containing data to be loaded. Each row of the table appears as one line of the file. If it does not contain an absolute path, the file name is relative to the current working directory, getwd().
 #' @return data frame
 #' @keywords internal
-#' @noRd
+#' @export
 #' @examples
 #' load_txt('./data/my_txt_file.txt')
 load_txt <- function(file) {

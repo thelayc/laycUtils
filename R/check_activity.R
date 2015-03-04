@@ -80,5 +80,5 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
     }
   } 
   
-  return(list(issue, issue_summary))
+  return(list(issue, issue_summary, p))
 }

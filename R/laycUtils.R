@@ -25,7 +25,7 @@ load_csv <- function(file) {
 #' @examples
 #' load_txt('./data/my_txt_file.txt')
 load_txt <- function(file) {
-  out <- read.table(file, header = TRUE, sep = '\t', quote = "", comment.char = "", na.strings = "")
+  out <- read.table(file, header = TRUE, sep = '\t', quote = "", comment.char = "", na.strings = "", stringsAsFactors = FALSE)
   out[] <- lapply(out, tolower)
   
   return(out)

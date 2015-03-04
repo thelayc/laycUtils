@@ -56,13 +56,12 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
   issue_summary <- dplyr::summarise(issue_summary, count = length(subject_id)) # Review dplyr for interactive use
   issue_summary <- dplyr::arrange(issue_summary, desc(count))
   
-  
-#   my_title <- 'Number of participants active in a program during FY14\nwithout any other type of information recorded in ETO\n'
-#   p <- ggplot(issue_summary, aes(x = reorder(program_name, n), y = n)) + coord_flip()
-#   p <- p + geom_point()
-#   p <- p + ggtitle(my_title)
-#   p <- p + ylim(c(0, 200))
-#   p
+  ## Create summary chart
+  my_title <- 'Number of participants active in a program\nwithout any service activity recorded in ETO\n'
+  p <- ggplot(issue_summary, aes(x = reorder(program_name, n), y = n)) + coord_flip()
+  p <- p + geom_point()
+  p <- p + ggtitle(my_title)
+  p <- p + ylim(c(0, 200))
  
   
   ## Save list of participants with issue
@@ -71,6 +70,7 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
     dir.create('output/issue_by_program')
     write.csv(issue, file = paste0('./output/full_issue_list.csv'), row.names = FALSE, na ="")
     write.csv(issue_summary, file = paste0('./output/issue_summary.csv'), row.names = FALSE, na ="")
+    ggplot2::ggsave(file_name = issue_summary, plot = p, width = 15, height = 10, units = 'cm')
     
     programs <- sort(unique(issue$program_name))
     

@@ -9,6 +9,7 @@
 #' @param save_output logical: FALSE: Return output on screen, TRUE: Save output in the "output" folder in the working directory
 #' @return plot and data frame
 #' @export
+#' @import ggplot2
 #' @examples
 #' check_activity(enroll_file = './data/enroll.txt', pos_file = './data/pos.txt', asmt_file = './data/asmt.txt', ref_file = './data/ref.txt')
 
@@ -58,7 +59,7 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
   
   ## Create summary chart
   my_title <- 'Number of participants active in a program\nwithout any service activity recorded in ETO\n'
-  p <- ggplot2::ggplot(issue_summary, aes(x = reorder(program_name, n), y = n)) + coord_flip()
+  p <- ggplot(issue_summary, aes(x = reorder(program_name, n), y = n)) + coord_flip()
   p <- p + geom_point()
   p <- p + ggtitle(my_title)
   p <- p + ylim(c(0, 200))
@@ -70,7 +71,7 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
     dir.create('output/issue_by_program')
     write.csv(issue, file = paste0('./output/full_issue_list.csv'), row.names = FALSE, na ="")
     write.csv(issue_summary, file = paste0('./output/issue_summary.csv'), row.names = FALSE, na ="")
-    ggplot2::ggsave(file_name = './output/issue_summary.png', plot = p, width = 15, height = 10, units = 'cm')
+    ggsave(file_name = './output/issue_summary.png', plot = p, width = 15, height = 10, units = 'cm')
     
     programs <- sort(unique(issue$program_name))
     
@@ -80,5 +81,5 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
     }
   } 
   
-  return(list(issue, issue_summary, p))
+  return(list(issue, issue_summary, plot = p))
 }

@@ -59,7 +59,7 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
   
   ## Create summary chart
   my_title <- 'Number of participants active in a program\nwithout any service activity recorded in ETO\n'
-  p <- ggplot(issue_summary, aes(x = reorder(program_name, n), y = n)) + coord_flip()
+  p <- ggplot(issue_summary, aes(x = reorder(program_name, count), y = count)) + coord_flip()
   p <- p + geom_point()
   p <- p + ggtitle(my_title)
   p <- p + ylim(c(0, 200))

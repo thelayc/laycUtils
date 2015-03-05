@@ -71,7 +71,7 @@ check_activity <- function(enroll_file, pos_file, tp_file, asmt_file, ref_file, 
     dir.create('output/issue_by_program')
     write.csv(issue, file = paste0('./output/full_issue_list.csv'), row.names = FALSE, na ="")
     write.csv(issue_summary, file = paste0('./output/issue_summary.csv'), row.names = FALSE, na ="")
-    ggsave(filename = './output/issue_summary.png', plot = p, width = 15, height = 10, units = 'cm')
+    ggsave(filename = './output/issue_summary.png', plot = p, width = 25, height = 25, units = 'cm')
     
     programs <- sort(unique(issue$program_name))
     

@@ -14,12 +14,15 @@ clean_data <- function(data,
                      to_date = c('start', 'end', 'date'),
                      to_numeric = c('days_enrolled', 'time')) {
   # Turn everything to lower case to make data manipulation easier
+  message('Passing all variables to lower case...')
   data[] <- lapply(data, tolower)
   # Turn date columns to date format
   to_date <- intersect(to_date, colnames(data))
+  message(paste('Formatting these variables as date:', to_date))
   data[to_date] <- lapply(data[to_date], lubridate::mdy)
   # Turn numeric columns to numeric
   to_numeric <- intersect(to_numeric, colnames(data))
+  message(paste('Formatting these variables as numeric:', to_date))
   num_columns <- stringr::str_detect(colnames(data), 'id$')
   num_columns <- colnames(data)[num_columns]
   num_columns <- c(num_columns, to_numeric)

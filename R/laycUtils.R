@@ -9,8 +9,7 @@
 #' load_csv('./data/my_csv_file.csv')
 
 load_csv <- function(file) {
-  out <- read.csv(file, header = TRUE, stringsAsFactors = FALSE, na.strings = "")
-  out[] <- lapply(out, tolower)
+  out <- read.csv(file, header = TRUE, stringsAsFactors = FALSE, na.strings = "", colClasses = "character")
   
   return(out)
 }
@@ -25,8 +24,7 @@ load_csv <- function(file) {
 #' @examples
 #' load_txt('./data/my_txt_file.txt')
 load_txt <- function(file) {
-  out <- read.table(file, header = TRUE, sep = '\t', quote = "", comment.char = "", na.strings = "", stringsAsFactors = FALSE)
-  out[] <- lapply(out, tolower)
+  out <- read.table(file, header = TRUE, sep = '\t', quote = "", comment.char = "", na.strings = "", stringsAsFactors = FALSE, colClasses = "character")
   
   return(out)
 }

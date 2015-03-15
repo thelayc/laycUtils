@@ -1,4 +1,4 @@
-#' clean_data(v)
+#' clean_data()
 #'
 #' This function conducts basic data cleaning tasks on a data frame.
 #' @param data dataframe: a dataframe containing.

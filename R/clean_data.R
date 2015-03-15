@@ -18,14 +18,16 @@ clean_data <- function(data,
   data[] <- lapply(data, tolower)
   # Turn date columns to date format
   to_date <- intersect(to_date, colnames(data))
-  message(paste('Formatting these variables as date:', to_date))
+  message(paste('Formatting these variables as date:', 
+                paste(to_date, collapse = ", ")))
   data[to_date] <- lapply(data[to_date], lubridate::mdy)
   # Turn numeric columns to numeric
   to_numeric <- intersect(to_numeric, colnames(data))
-  message(paste('Formatting these variables as numeric:', to_date))
   num_columns <- stringr::str_detect(colnames(data), 'id$')
   num_columns <- colnames(data)[num_columns]
   num_columns <- c(num_columns, to_numeric)
+  message(paste('Formatting these variables as numeric:', 
+                paste(num_columns, collapse = ", ")))
   data[num_columns] <- lapply(data[num_columns], tidyr::extract_numeric)
   
   return(data)

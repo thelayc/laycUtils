@@ -23,11 +23,11 @@ clean_data <- function(data,
   data[to_date] <- lapply(data[to_date], lubridate::mdy)
   # Turn numeric columns to numeric
   to_numeric <- intersect(to_numeric, colnames(data))
-  message(paste('Formatting these variables as numeric:', 
-                paste(to_numeric, collapse = ", ")))
   num_columns <- stringr::str_detect(colnames(data), 'id$')
   num_columns <- colnames(data)[num_columns]
   num_columns <- c(num_columns, to_numeric)
+  message(paste('Formatting these variables as numeric:', 
+                paste(num_columns, collapse = ", ")))
   data[num_columns] <- lapply(data[num_columns], tidyr::extract_numeric)
   
   return(data)

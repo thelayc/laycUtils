@@ -4,10 +4,12 @@
 \alias{load_csv}
 \title{load_csv()}
 \usage{
-load_csv(file)
+load_csv(file, ...)
 }
 \arguments{
 \item{file}{character vector: the name of the file which the data are to be read from. Each row of the table appears as one line of the file. If it does not contain an absolute path, the file name is relative to the current working directory, getwd().}
+
+\item{...}{Other arguments to be passed to load_csv(). See ?read.table to get the list of possible arguments}
 }
 \value{
 data frame

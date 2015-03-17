@@ -4,10 +4,12 @@
 \alias{load_txt}
 \title{load_txt()}
 \usage{
-load_txt(file)
+load_txt(file, ...)
 }
 \arguments{
 \item{file}{character vector: path .txt file containing data to be loaded. Each row of the table appears as one line of the file. If it does not contain an absolute path, the file name is relative to the current working directory, getwd().}
+
+\item{...}{Other arguments to be passed to load_txt(). See ?read.table to get the list of possible arguments}
 }
 \value{
 data frame

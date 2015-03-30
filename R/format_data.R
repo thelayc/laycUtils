@@ -1,4 +1,4 @@
-#' clean_data()
+#' format_data()
 #'
 #' This function conducts basic data cleaning tasks on a data frame.
 #' @param data dataframe: a dataframe containing.
@@ -8,9 +8,9 @@
 #' @export
 #' @examples
 #' enroll <- laycUtils::load_txt('./my_data_folder/enrollment.txt')
-#' clean_data(data = enroll)
+#' format_data(data = enroll)
 
-clean_data <- function(data,
+format_data <- function(data,
                      to_date = c('start', 'end', 'date'),
                      to_numeric = c('days_enrolled', 'time')) {
   # Turn everything to lower case to make data manipulation easier

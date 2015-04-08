@@ -4,8 +4,8 @@
 \alias{format_data}
 \title{format_data()}
 \usage{
-format_data(data, to_date = c("start", "end", "date"),
-  to_numeric = c("days_enrolled", "time"))
+format_data(data, to_date = c("start$|^start|end$|^end|date"),
+  to_numeric = c("id$|days|time|weight|wage"))
 }
 \arguments{
 \item{data}{dataframe: a dataframe containing.}

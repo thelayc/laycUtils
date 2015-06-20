@@ -11,6 +11,10 @@
 fuzzy_join <- function(x, y, by) {
   
   # CHECK: That both datasets are tidy (no duplicated rows)
+  assertthat::assert_that(class(x) == "data.frame")
+  assertthat::assert_that(class(y) == "data.frame")
+  assertthat::assert_that(by %in% colnames(x))
+  assertthat::assert_that(by %in% colnames(y))
   assertthat::assert_that(nrow(x) == length(unique(x[, by])))
   assertthat::assert_that(nrow(y) == length(unique(y[, by])))
   

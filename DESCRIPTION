@@ -12,4 +12,5 @@ Imports: ggplot2,
     lubridate,
     tidyr,
     stringr,
-    dplyr
+    dplyr,
+    assertthat

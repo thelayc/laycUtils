@@ -11,4 +11,5 @@ Imports: ggplot2,
     extrafont,
     lubridate,
     tidyr,
-    stringr
+    stringr,
+    dplyr

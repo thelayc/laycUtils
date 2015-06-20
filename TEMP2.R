@@ -25,42 +25,37 @@ rm(eto)
 
 # Perfect match -----------------------------------------------------------
 #The first matching pass - are there any rows in the two lists that have exactly the same signature?
-xy = merge(xx,yy,by = 'my_id', all = T)
-
-matched = subset(xy,subset = (!(is.na(raw_id.x)) & !(is.na(raw_id.y))))
-
+matched <- inner_join(x = xx, y = yy, by = "my_id")
 # Identify perfect matches
 matched$match_status = "perfect match"
 
 
 # Partial match -----------------------------------------------------------
 #Grab the rows from the first list that were unmatched - that is, no matching item from the second list appears
-todo = subset(xy,subset = (is.na(raw_id.y)))
+todo <- anti_join(x = xx, y = yy, by = "my_id")
 
 todo <- select(todo, my_id, raw_id = raw_id.x)
 
 # partial match
 todo$partials = as.character(sapply(todo$my_id, FUN = agrep, yy$my_id, max.distance = 0.1, value = T))
 todo$partials[todo$partials == "character(0)"] <- NA
-#todo$dist = as.character(sapply(todo$my_id, agrep, yy$my_id))
 
 #Bring the original text into the partial match list based on the sig key.
-partial_matched = merge(todo, yy, by.x = 'partials', by.y = 'my_id', aall.x = TRUE)
-
-#Find the items that were actually partially matched, and pull out the columns relating to signatures and raw text
-partial_matched = subset(partial_matched, subset = (!(is.na(raw_id.x)) & !(is.na(raw_id.y))))
+partial_matched <- inner_join(x = todo, y = yy, by = c("partials" = "my_id"))
 
 #Label these rows as partial match items
 partial_matched$match_status = "Partial"
-partial_matched <- select(partial_matched, -partials)
+partial_matched["partials"] <- NULL
 
 # Unmatched ---------------------------------------------------------------
 #Find the rows that still haven't been matched
-unmatched = subset(todo, subset = (is.na(partials)))
+unmatched <- todo[is.na(todo$partials), ]
 unmatched$match_status <- 'unmatched'
+unmatched["partials"] <- NULL
+colnames(unmatched)[colnames(unmatched) == 'raw_id'] <- 'raw_id.x'
 
 #Add the set of partially matched items to the set of duplicate matched items
-matched = rbind(matched,partial_matched, unmatched)
+out <- dplyr::bind_rows(matched,partial_matched, unmatched)
 
 
 

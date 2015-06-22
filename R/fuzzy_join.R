@@ -20,7 +20,7 @@ fuzzy_join <- function(x, y, by) {
   
   # STEP 1: Identify records that are a perfect match
   matched <- dplyr::inner_join(x = x, y = y, by = by)
-  matched$match_status = "perfect match"
+  if (nrow(matched) > 0) {matched$match_status <- "perfect match"}
   
   
   # STEP 2: Identify records that match partially
@@ -37,12 +37,12 @@ fuzzy_join <- function(x, y, by) {
   # Bring the original records into the partial match list
   partial_match <- dplyr::inner_join(x = temp, y = y, 
                                      by = c("partials" = by))
-  partial_match$match_status = "partial match"
+  if (nrow(partial_match) > 0) {partial_match$match_status <- "partial match"}
   partial_match["partials"] <- NULL
   
   # STEP 3: Identify unmatched records
   unmatched <- temp[is.na(temp$partials), ]
-  unmatched$match_status <- 'unmatched'
+  if (nrow(unmatched) > 0) {unmatched$match_status <- 'unmatched'}
   unmatched["partials"] <- NULL
   colnames(unmatched)[colnames(unmatched) == 'raw_id'] <- 'raw_id.x'
   

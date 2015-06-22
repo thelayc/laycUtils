@@ -1,0 +1,48 @@
+---
+title: "fuzzy_join()"
+author: "Tony Fujs"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The fuzzy_join() function merges datasets that don't have any common id to merge them on. For instance, two different datasets can contain both `first name`, and `last name` information, but due to typos, discrepancies will exist between the two datasets.   
+
+## STEP 1: Load the data sets to be merged
+```{r, fig.show='hold'}
+data(eto)
+head(eto)
+
+data(nwea)
+head(nwea)
+```
+
+Both data sets contains `first name` and `last name`. We will create a custom id variable based on names.
+
+## STEP 2: Create custom id variable
+
+```{r, fig.show='hold'}
+eto$my_id <- create_id(eto, var = c('lname', 'fname'))
+head(eto)
+
+nwea$my_id <- create_id(nwea, var = c('StudentLastName', 'StudentFirstName'))
+head(nwea)
+```
+
+
+## STEP 3: Merge both datasets
+
+```{r, fig.show='hold'}
+df <- fuzzy_join(x = nwea, y = eto, by = 'my_id')
+
+head(df)
+```
+
+Both data sets have been merged. A new variable `match_status` identifies whether the match was `perfect`, `partial`, or if the record was `unmatched`
+
+
+> "Thanks @psychemedia for most of the code"
+([via](http://blog.ouseful.info/2012/09/26/merging-data-sets-based-on-partially-matched-data-elements/))

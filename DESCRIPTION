@@ -14,3 +14,5 @@ Imports: ggplot2,
     stringr,
     dplyr,
     assertthat
+Suggests: knitr
+VignetteBuilder: knitr

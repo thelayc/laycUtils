@@ -1,8 +1,8 @@
 #' fuzzy_join()
 #'
-#' Merge 2 dataframes with inconsistent ID variables (due to typos for instance). 
-#' @param x,y dataframe to merge
-#' @param by a character variable to join by. This variable is generally the otput of the create_id() function
+#' Merge 2 dataframes with inconsistent ID variables (due to typos, for instance). 
+#' @param x,y dataframes to merge
+#' @param by a character variable to join by. This variable is generally the output of the create_id() function
 #' @return dataframe
 #' @export
 #' @examples

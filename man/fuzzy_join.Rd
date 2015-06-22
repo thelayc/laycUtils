@@ -7,15 +7,15 @@
 fuzzy_join(x, y, by)
 }
 \arguments{
-\item{x,y}{dataframe to merge}
+\item{x,y}{dataframes to merge}
 
-\item{by}{a character variable to join by. This variable is generally the otput of the create_id() function}
+\item{by}{a character variable to join by. This variable is generally the output of the create_id() function}
 }
 \value{
 dataframe
 }
 \description{
-Merge 2 dataframes with inconsistent ID variables (due to typos for instance).
+Merge 2 dataframes with inconsistent ID variables (due to typos, for instance).
 }
 \examples{
 fuzzy_join(x = dataframe1, y = dataframe2, by = 'custom_id')

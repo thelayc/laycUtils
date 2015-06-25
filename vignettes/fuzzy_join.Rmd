@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(laycUtils)
+```
+
 The fuzzy_join() function merges datasets that don't have any common id to merge them on. For instance, two different datasets can contain both `first name`, and `last name` information, but due to typos, discrepancies will exist between the two datasets.   
 
 ## STEP 1: Load the data sets to be merged

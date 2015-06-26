@@ -4,7 +4,6 @@
 #' @param var character vector: list of variables to be concatenated to form the new id
 #' @param df dataframe
 #' @return character vector
-#' @keywords internal
 #' @export
 #' @examples
 #' create_id(df, c('first_name', 'last_name')

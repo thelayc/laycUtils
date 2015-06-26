@@ -20,5 +20,4 @@ Helper function. Assign date to missing records
 \examples{
 assign_date(my_dates, new_date = '01/01/2015')
 }
-\keyword{internal}
 

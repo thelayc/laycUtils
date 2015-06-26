@@ -20,5 +20,4 @@ Helper function. Set default options for the read.table function
 \examples{
 load_txt('./data/my_txt_file.txt')
 }
-\keyword{internal}
 

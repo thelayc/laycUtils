@@ -20,5 +20,4 @@ Helper function. Set default options for the read.csv function
 \examples{
 load_csv('./data/my_csv_file.csv')
 }
-\keyword{internal}
 

@@ -4,7 +4,6 @@
 #' @param file character vector: path .txt file containing data to be loaded. Each row of the table appears as one line of the file. If it does not contain an absolute path, the file name is relative to the current working directory, getwd().
 #' @param ... Other arguments to be passed to load_txt(). See ?read.table to get the list of possible arguments
 #' @return data frame
-#' @keywords internal
 #' @export
 #' @examples
 #' load_txt('./data/my_txt_file.txt')

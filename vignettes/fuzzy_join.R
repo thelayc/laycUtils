@@ -1,3 +1,7 @@
+## ---- echo = FALSE, message = FALSE--------------------------------------
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(laycUtils)
+
 ## ---- fig.show='hold'----------------------------------------------------
 data(eto)
 head(eto)

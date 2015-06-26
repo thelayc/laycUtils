@@ -10,7 +10,7 @@
 
 <meta name="author" content="Tony Fujs" />
 
-<meta name="date" content="2015-06-22" />
+<meta name="date" content="2015-06-26" />
 
 <title>fuzzy_join()</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">fuzzy_join()</h1>
 <h4 class="author"><em>Tony Fujs</em></h4>
-<h4 class="date"><em>2015-06-22</em></h4>
+<h4 class="date"><em>2015-06-26</em></h4>
 </div>
 
 
@@ -62,76 +62,78 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="step-1-load-the-data-sets-to-be-merged" class="section level2">
 <h2>STEP 1: Load the data sets to be merged</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(eto)
-<span class="kw">head</span>(eto)</code></pre>
-<pre><code>##   id    fname lname
-## 1  1 Veronica  Fake
-## 2  2   Yasmin  Fake
-## 3  3    Neisy  Fake
-## 4  4  Ninoska  Fake
-## 5  5   Oneily  Fake
-## 6  6   Glenda  Fake</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(nwea)
-<span class="kw">head</span>(nwea)</code></pre>
-<pre><code>##         TermName StudentLastName StudentFirstName MeasurementScale
-## 1 Fall 2013-2014            Fake           Laveda          Reading
-## 2 Fall 2013-2014            Fake            Kevin          Reading
-## 3 Fall 2013-2014            Fake            David          Reading
-## 4 Fall 2013-2014            Fake          Maribel          Reading
-## 5 Fall 2013-2014            Fake           Connie          Reading
-## 6 Fall 2013-2014            Fake           Andrew          Reading
-##   TestRITScore
-## 1          242
-## 2          263
-## 3          217
-## 4          212
-## 5          226
-## 6          253</code></pre>
+<span class="kw">head</span>(eto)
+<span class="co">#&gt;   id    fname lname</span>
+<span class="co">#&gt; 1  1 Veronica  Fake</span>
+<span class="co">#&gt; 2  2   Yasmin  Fake</span>
+<span class="co">#&gt; 3  3    Neisy  Fake</span>
+<span class="co">#&gt; 4  4  Ninoska  Fake</span>
+<span class="co">#&gt; 5  5   Oneily  Fake</span>
+<span class="co">#&gt; 6  6   Glenda  Fake</span>
+
+<span class="kw">data</span>(nwea)
+<span class="kw">head</span>(nwea)
+<span class="co">#&gt;         TermName StudentLastName StudentFirstName MeasurementScale</span>
+<span class="co">#&gt; 1 Fall 2013-2014            Fake           Laveda          Reading</span>
+<span class="co">#&gt; 2 Fall 2013-2014            Fake            Kevin          Reading</span>
+<span class="co">#&gt; 3 Fall 2013-2014            Fake            David          Reading</span>
+<span class="co">#&gt; 4 Fall 2013-2014            Fake          Maribel          Reading</span>
+<span class="co">#&gt; 5 Fall 2013-2014            Fake           Connie          Reading</span>
+<span class="co">#&gt; 6 Fall 2013-2014            Fake           Andrew          Reading</span>
+<span class="co">#&gt;   TestRITScore</span>
+<span class="co">#&gt; 1          242</span>
+<span class="co">#&gt; 2          263</span>
+<span class="co">#&gt; 3          217</span>
+<span class="co">#&gt; 4          212</span>
+<span class="co">#&gt; 5          226</span>
+<span class="co">#&gt; 6          253</span></code></pre>
 <p>Both data sets contains <code>first name</code> and <code>last name</code>. We will create a custom id variable based on names.</p>
 </div>
 <div id="step-2-create-custom-id-variable" class="section level2">
 <h2>STEP 2: Create custom id variable</h2>
 <pre class="sourceCode r"><code class="sourceCode r">eto$my_id &lt;-<span class="st"> </span><span class="kw">create_id</span>(eto, <span class="dt">var =</span> <span class="kw">c</span>(<span class="st">'lname'</span>, <span class="st">'fname'</span>))
-<span class="kw">head</span>(eto)</code></pre>
-<pre><code>##   id    fname lname        my_id
-## 1  1 Veronica  Fake fakeveronica
-## 2  2   Yasmin  Fake   fakeyasmin
-## 3  3    Neisy  Fake    fakeneisy
-## 4  4  Ninoska  Fake  fakeninoska
-## 5  5   Oneily  Fake   fakeoneily
-## 6  6   Glenda  Fake   fakeglenda</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">nwea$my_id &lt;-<span class="st"> </span><span class="kw">create_id</span>(nwea, <span class="dt">var =</span> <span class="kw">c</span>(<span class="st">'StudentLastName'</span>, <span class="st">'StudentFirstName'</span>))
-<span class="kw">head</span>(nwea)</code></pre>
-<pre><code>##         TermName StudentLastName StudentFirstName MeasurementScale
-## 1 Fall 2013-2014            Fake           Laveda          Reading
-## 2 Fall 2013-2014            Fake            Kevin          Reading
-## 3 Fall 2013-2014            Fake            David          Reading
-## 4 Fall 2013-2014            Fake          Maribel          Reading
-## 5 Fall 2013-2014            Fake           Connie          Reading
-## 6 Fall 2013-2014            Fake           Andrew          Reading
-##   TestRITScore       my_id
-## 1          242  fakelaveda
-## 2          263   fakekevin
-## 3          217   fakedavid
-## 4          212 fakemaribel
-## 5          226  fakeconnie
-## 6          253  fakeandrew</code></pre>
+<span class="kw">head</span>(eto)
+<span class="co">#&gt;   id    fname lname        my_id</span>
+<span class="co">#&gt; 1  1 Veronica  Fake fakeveronica</span>
+<span class="co">#&gt; 2  2   Yasmin  Fake   fakeyasmin</span>
+<span class="co">#&gt; 3  3    Neisy  Fake    fakeneisy</span>
+<span class="co">#&gt; 4  4  Ninoska  Fake  fakeninoska</span>
+<span class="co">#&gt; 5  5   Oneily  Fake   fakeoneily</span>
+<span class="co">#&gt; 6  6   Glenda  Fake   fakeglenda</span>
+
+nwea$my_id &lt;-<span class="st"> </span><span class="kw">create_id</span>(nwea, <span class="dt">var =</span> <span class="kw">c</span>(<span class="st">'StudentLastName'</span>, <span class="st">'StudentFirstName'</span>))
+<span class="kw">head</span>(nwea)
+<span class="co">#&gt;         TermName StudentLastName StudentFirstName MeasurementScale</span>
+<span class="co">#&gt; 1 Fall 2013-2014            Fake           Laveda          Reading</span>
+<span class="co">#&gt; 2 Fall 2013-2014            Fake            Kevin          Reading</span>
+<span class="co">#&gt; 3 Fall 2013-2014            Fake            David          Reading</span>
+<span class="co">#&gt; 4 Fall 2013-2014            Fake          Maribel          Reading</span>
+<span class="co">#&gt; 5 Fall 2013-2014            Fake           Connie          Reading</span>
+<span class="co">#&gt; 6 Fall 2013-2014            Fake           Andrew          Reading</span>
+<span class="co">#&gt;   TestRITScore       my_id</span>
+<span class="co">#&gt; 1          242  fakelaveda</span>
+<span class="co">#&gt; 2          263   fakekevin</span>
+<span class="co">#&gt; 3          217   fakedavid</span>
+<span class="co">#&gt; 4          212 fakemaribel</span>
+<span class="co">#&gt; 5          226  fakeconnie</span>
+<span class="co">#&gt; 6          253  fakeandrew</span></code></pre>
 </div>
 <div id="step-3-merge-both-datasets" class="section level2">
 <h2>STEP 3: Merge both datasets</h2>
 <pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">fuzzy_join</span>(<span class="dt">x =</span> nwea, <span class="dt">y =</span> eto, <span class="dt">by =</span> <span class="st">'my_id'</span>)
 
-<span class="kw">head</span>(df)</code></pre>
-<pre><code>## Source: local data frame [6 x 10]
-## 
-##         TermName StudentLastName StudentFirstName MeasurementScale
-## 1 Fall 2013-2014            Fake            Kevin          Reading
-## 2 Fall 2013-2014            Fake            Neisy          Reading
-## 3 Fall 2013-2014            Fake          Adriana          Reading
-## 4 Fall 2013-2014            Fake           Willie          Reading
-## 5 Fall 2013-2014            Fake          Rashawn          Reading
-## 6 Fall 2013-2014            Fake           Joshua          Reading
-## Variables not shown: TestRITScore (chr), my_id (chr), id (chr), fname
-##   (chr), lname (chr), match_status (chr)</code></pre>
+<span class="kw">head</span>(df)
+<span class="co">#&gt; Source: local data frame [6 x 10]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;         TermName StudentLastName StudentFirstName MeasurementScale</span>
+<span class="co">#&gt; 1 Fall 2013-2014            Fake            Kevin          Reading</span>
+<span class="co">#&gt; 2 Fall 2013-2014            Fake            Neisy          Reading</span>
+<span class="co">#&gt; 3 Fall 2013-2014            Fake          Adriana          Reading</span>
+<span class="co">#&gt; 4 Fall 2013-2014            Fake           Willie          Reading</span>
+<span class="co">#&gt; 5 Fall 2013-2014            Fake          Rashawn          Reading</span>
+<span class="co">#&gt; 6 Fall 2013-2014            Fake           Joshua          Reading</span>
+<span class="co">#&gt; Variables not shown: TestRITScore (chr), my_id (chr), id (chr), fname</span>
+<span class="co">#&gt;   (chr), lname (chr), match_status (chr)</span></code></pre>
 <p>Both data sets have been merged. A new variable <code>match_status</code> identifies whether the match was <code>perfect</code>, <code>partial</code>, or if the record was <code>unmatched</code></p>
 <blockquote>
 <p>“Thanks <span class="citation">@psychemedia</span> for most of the code” (<a href="http://blog.ouseful.info/2012/09/26/merging-data-sets-based-on-partially-matched-data-elements/">via</a>)</p>

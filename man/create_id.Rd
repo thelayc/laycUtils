@@ -20,5 +20,4 @@ Helper function. Create custom id by concatenating different variables
 \examples{
 create_id(df, c('first_name', 'last_name')
 }
-\keyword{internal}
 

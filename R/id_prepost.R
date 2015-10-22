@@ -22,7 +22,7 @@ id_prepost <- function(df, date) {
   
   # Assign pre / post values to first / last date taken
   
-  df$prepost[df[, date] == df$first & df$first != df$last] <- 'pre'
+  df$prepost[df[, date] == df$first] <- 'pre'
   df$prepost[df[, date] == df$last & df$first != df$last] <- 'post'
   df$prepost <- factor(df$prepost, levels = c('pre', 'post'))
   

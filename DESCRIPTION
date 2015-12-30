@@ -7,12 +7,16 @@ Author: Who wrote it
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
-Imports: ggplot2,
+Depends: R (>= 3.1.0)
+Imports:
+    ggplot2,
     extrafont,
     lubridate,
     tidyr,
     stringr,
     dplyr,
     assertthat
-Suggests: knitr
+Suggests:
+    knitr
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

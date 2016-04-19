@@ -4,7 +4,7 @@
 \alias{plot_change}
 \title{plot_change()}
 \usage{
-plot_change(df, my_palette = c("#2CA02C", "#FF7F0E", "#D62728"))
+plot_change(var, my_palette = c("#2CA02C", "#FF7F0E", "#D62728"))
 }
 \arguments{
 \item{var:}{The variable to plot}
@@ -13,9 +13,6 @@ plot_change(df, my_palette = c("#2CA02C", "#FF7F0E", "#D62728"))
 dataframe
 }
 \description{
-Function that creates a plot from numeric variable showing change
-}
-\examples{
-df <- id_prepost(df, date = 'test_date') 
+Takes a continuous variable with values from -Inf to +Inf, recodes the variable into three categories: negative, no change, positive, and plot the results.
 }
 
